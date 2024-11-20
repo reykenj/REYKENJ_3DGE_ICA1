@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 using static UnityEngine.Rendering.DebugUI;
 
 public class FPSController : MonoBehaviour
@@ -44,6 +45,8 @@ public class FPSController : MonoBehaviour
     private float shakeTimeRemaining = 0.0f; // time remaining since shake starts
     private Vector3 originalPosition; // stores original position to return to
     private Vector3 shakeOffset; // stores the offset during shake
+    private bool _sliding = false;
+    //private Vector3 SlideForward;
 
 
 
@@ -104,24 +107,36 @@ public class FPSController : MonoBehaviour
         //Camera.main.fieldOfView = 1;
         Vector2 input = moveAction.ReadValue<Vector2>();
         Jump();
-        Crouch();
-
         if (sprintAction.IsPressed() && !crouchAction.IsPressed())
         {
             speed_multiplier = Mathf.Lerp(speed_multiplier, 5.0f, 5 * Time.deltaTime);
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, OriginalFOV * 2, 5 * Time.deltaTime);
         }
-        else
+        else if (sprintAction.IsPressed() && speed_multiplier >= 4.5f && !_sliding)
         {
+            _sliding = true;
+            move = transform.forward;
+            speed_multiplier = speed_multiplier * 2f;
+        }
+        else if(!_sliding)
+        {
+            Crouch();
             speed_multiplier = Mathf.Lerp(speed_multiplier, 1.0f, 5 * Time.deltaTime);
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, OriginalFOV, 5 * Time.deltaTime);
         }
 
-        move = transform.right * input.x + transform.forward * input.y;
-        jumpVelocity.y += gravity * Time.deltaTime;
-        Vector3 finalMove = jumpVelocity + move * speed * speed_multiplier;
 
-        characterController.Move(finalMove * Time.deltaTime);
+        jumpVelocity.y += gravity * Time.deltaTime;
+        if (!_sliding)
+        {
+            move = transform.right * input.x + transform.forward * input.y;
+            Vector3 finalMove = jumpVelocity + move * speed * speed_multiplier;
+            characterController.Move(finalMove * Time.deltaTime);
+        }
+        else
+        {
+            Sliding();
+        }
 
         Shoot();
         PickUp();
@@ -228,13 +243,34 @@ public class FPSController : MonoBehaviour
             currentWeapon.gameObject.SetActive(true);
         }
     }
+    void Sliding()
+    {
+        if (crouchAction.IsPressed())
+        {
+            speed_multiplier = Mathf.Lerp(speed_multiplier, 1.0f, 2f * Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, OriginalFOV * 2, 2f * Time.deltaTime);
+
+            characterController.height = Mathf.Lerp(characterController.height, NormHeight / 2, 10 * Time.deltaTime);
+            Vector3 finalMove = jumpVelocity + move * speed * speed_multiplier;
+            characterController.Move(finalMove * Time.deltaTime);
+            bobbingOffset = Mathf.Lerp(bobbingOffset, -0.5F, 10 * Time.deltaTime);
+            if (speed_multiplier <= 1.1f)
+            {
+                _sliding = false;
+            }
+        }
+        else
+        {
+            _sliding = false;
+        }
+    }
 
     private void HandleCameraBob()
     {
         if (!characterController.isGrounded) return;
         Transform cameraTransform = Camera.main.transform;
         bool isMoving = move.magnitude > 0;
-        if (isMoving)
+        if (isMoving && !_sliding)
         {
             // Increment the bobbing timer as player is moving
             timer += Time.deltaTime * bobFrequency * speed_multiplier;
