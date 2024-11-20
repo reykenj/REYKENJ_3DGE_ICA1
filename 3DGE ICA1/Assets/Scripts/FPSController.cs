@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
 using static UnityEngine.Rendering.DebugUI;
@@ -46,6 +47,9 @@ public class FPSController : MonoBehaviour
     private Vector3 originalPosition; // stores original position to return to
     private Vector3 shakeOffset; // stores the offset during shake
     private bool _sliding = false;
+
+    private RaycastHit slopeHit;
+    [SerializeField] private float maxSlopeAngle = 45.0f;
     //private Vector3 SlideForward;
 
 
@@ -129,8 +133,26 @@ public class FPSController : MonoBehaviour
         jumpVelocity.y += gravity * Time.deltaTime;
         if (!_sliding)
         {
+            Debug.Log("should be");
             move = transform.right * input.x + transform.forward * input.y;
-            Vector3 finalMove = jumpVelocity + move * speed * speed_multiplier;
+            Vector3 SlopeDirection = new Vector3(0, 0, 0);
+            if (OnSlope())
+            {
+                //move.y -= Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad) * Mathf.Abs(gravity);  //gravity * Vector3.Angle(Vector3.up, slopeHit.normal);
+                SlopeDirection.y = Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad) * Mathf.Abs(gravity);
+                SlopeDirection = GetSlopeMoveDirection(SlopeDirection);
+               
+                //if(SlopeDirection.y <= 0)
+                //{
+                //    move.y -= Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad) * Mathf.Abs(gravity);
+                //}
+                move = GetSlopeMoveDirection(move);
+                //if (SlopeDirection.y > 0)
+                //{
+                //    move *= 1 - Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad);
+                //}
+            }
+            Vector3 finalMove = jumpVelocity + move * speed * speed_multiplier - SlopeDirection;
             characterController.Move(finalMove * Time.deltaTime);
         }
         else
@@ -319,5 +341,22 @@ public class FPSController : MonoBehaviour
         }
         transform.position = startPosition;
 
+    }
+
+
+    public bool OnSlope()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, NormHeight * 0.5f + 0.4f))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle < maxSlopeAngle && angle != 0;
+        }
+
+        return false;
+    }
+
+    public Vector3 GetSlopeMoveDirection(Vector3 direction)
+    {
+        return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 }
