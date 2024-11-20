@@ -105,9 +105,8 @@ public class FPSController : MonoBehaviour
         Vector2 input = moveAction.ReadValue<Vector2>();
         Jump();
         Crouch();
-        move = transform.right * input.x + transform.forward * input.y;
 
-        if (sprintAction.IsPressed())
+        if (sprintAction.IsPressed() && !crouchAction.IsPressed())
         {
             speed_multiplier = Mathf.Lerp(speed_multiplier, 5.0f, 5 * Time.deltaTime);
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, OriginalFOV * 2, 5 * Time.deltaTime);
@@ -118,6 +117,7 @@ public class FPSController : MonoBehaviour
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, OriginalFOV, 5 * Time.deltaTime);
         }
 
+        move = transform.right * input.x + transform.forward * input.y;
         jumpVelocity.y += gravity * Time.deltaTime;
         Vector3 finalMove = jumpVelocity + move * speed * speed_multiplier;
 
@@ -159,16 +159,19 @@ public class FPSController : MonoBehaviour
             jumpVelocity.y = -2.0f;
         }
     }
-    void Crouch()
+    bool Crouch()
     {
+        Debug.Log("CROUCH");
         if (crouchAction.IsPressed())
         {
             characterController.height = Mathf.Lerp(characterController.height, NormHeight / 2, 5 * Time.deltaTime);
             //characterController.center = new Vector3(characterController.center.x, (characterController.height - NormHeight), characterController.center.z);
+            return true;
         }
         else
         {
             characterController.height = Mathf.Lerp(characterController.height, NormHeight, 5 * Time.deltaTime);
+            return false;
         }
 
     }
