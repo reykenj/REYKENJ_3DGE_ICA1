@@ -4,6 +4,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] public WeaponData weaponData;
     [SerializeField] private GameObject impactEffect;
+    [SerializeField] private RecoilManager CameraRecoil;
     protected float nextFireTime = 0f;
     protected float ScopeTime = 10.0f;
 
@@ -39,6 +40,15 @@ public abstract class Weapon : MonoBehaviour
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, ScopeTime * Time.deltaTime);
         }
+    }
+
+    public void GunRecoil()
+    {
+        CameraRecoil.targetRotation += new Vector3(
+            weaponData.Recoil.x,
+            Random.Range(-weaponData.Recoil.y, weaponData.Recoil.y),
+            Random.Range(-weaponData.Recoil.z, weaponData.Recoil.z)
+        );
     }
 
 }

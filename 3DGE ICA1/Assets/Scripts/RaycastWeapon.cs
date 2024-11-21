@@ -7,6 +7,7 @@ public class RaycastWeapon : Weapon
         {
             nextFireTime = Time.time + weaponData.fireRate;
             PerformRaycast();
+            GunRecoil();
             ammoCount -= 1;
         }
     }
