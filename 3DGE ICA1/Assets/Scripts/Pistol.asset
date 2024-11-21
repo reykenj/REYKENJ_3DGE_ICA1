@@ -18,6 +18,7 @@ MonoBehaviour:
   fireRate: 0.1
   maxAmmo: 16
   SingleShot: 1
+  WeaponScopePosition: {x: -0.7, y: 0.22, z: -0.4}
   hitLayers:
     serializedVersion: 2
     m_Bits: 55
