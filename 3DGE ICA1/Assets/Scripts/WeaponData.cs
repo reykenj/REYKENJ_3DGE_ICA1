@@ -9,5 +9,6 @@ public class WeaponData : ScriptableObject
     public float fireRate = 0.1f;
     public int maxAmmo = 100;
     public bool SingleShot = false;
+    public Vector3 WeaponScopePosition = Vector3.zero;
     public LayerMask hitLayers; // Layers the weapon can hit
 }

@@ -5,6 +5,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] public WeaponData weaponData;
     [SerializeField] private GameObject impactEffect;
     protected float nextFireTime = 0f;
+    protected float ScopeTime = 10.0f;
 
     public int ammoCount = 0;
     // Abstract method for shooting, to be implemented by subclasses
@@ -25,6 +26,18 @@ public abstract class Weapon : MonoBehaviour
             {
                 damageable.TakeDamage(weaponData.damage);
             }
+        }
+    }
+
+    public void LookIntoScope(bool Scoping)
+    {
+        if (Scoping)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, weaponData.WeaponScopePosition, ScopeTime * Time.deltaTime);
+        }
+        else
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, ScopeTime * Time.deltaTime);
         }
     }
 

@@ -60,6 +60,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] private Weapon[] weapons;
     // For weapon switching
     private InputAction switchWeaponAction;
+    private InputAction scopeAction;
     private int currentWeaponIndex = 0;
     [HideInInspector] public Weapon currentWeapon;
 
@@ -96,6 +97,7 @@ public class FPSController : MonoBehaviour
         shootAction = playerInput.actions["Shoot"];
         pickUpAction = playerInput.actions["PickUp"];
         switchWeaponAction = playerInput.actions["SwitchWeapon"];
+        scopeAction = playerInput.actions["Scope"];
 
         // Bobbing initial parameter
         originalCameraY = Camera.main.transform.localPosition.y;
@@ -158,6 +160,7 @@ public class FPSController : MonoBehaviour
         Shoot();
         PickUp();
         SwitchWeapon();
+        Scope();
     }
 
     private void LateUpdate()
@@ -227,6 +230,11 @@ public class FPSController : MonoBehaviour
         {
             SingleShotCheck = false;
         }
+    }
+    public void Scope()
+    {
+        bool Scoping = scopeAction.IsPressed();
+        currentWeapon.LookIntoScope(Scoping);
     }
 
     private void PickUp()
