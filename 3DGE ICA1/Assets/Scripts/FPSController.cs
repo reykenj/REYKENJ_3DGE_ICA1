@@ -47,9 +47,11 @@ public class FPSController : MonoBehaviour
     private Vector3 originalPosition; // stores original position to return to
     private Vector3 shakeOffset; // stores the offset during shake
     private bool _sliding = false;
+    private bool SingleShotCheck = false;
 
     private RaycastHit slopeHit;
-    [SerializeField] private float maxSlopeAngle = 45.0f;
+    //[SerializeField] private float maxSlopeAngle = 45.0f;
+    [SerializeField] private float SlopeMultiplier = 10.0f;
     //private Vector3 SlideForward;
 
 
@@ -58,7 +60,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] private Weapon[] weapons;
     // For weapon switching
     private InputAction switchWeaponAction;
-    private int currentWeaponIndex;
+    private int currentWeaponIndex = 0;
     [HideInInspector] public Weapon currentWeapon;
 
     public static System.Action<int, int> OnAmmoCountChanged;
@@ -78,6 +80,7 @@ public class FPSController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentWeapon = weapons[currentWeaponIndex];
         // locks cursor to middle and makes it invisible
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -138,19 +141,11 @@ public class FPSController : MonoBehaviour
             Vector3 SlopeDirection = new Vector3(0, 0, 0);
             if (OnSlope())
             {
-                //move.y -= Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad) * Mathf.Abs(gravity);  //gravity * Vector3.Angle(Vector3.up, slopeHit.normal);
-                SlopeDirection.y = Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad) * Mathf.Abs(gravity);
+                SlopeDirection.y = Mathf.Abs(gravity);
                 SlopeDirection = GetSlopeMoveDirection(SlopeDirection);
-               
-                //if(SlopeDirection.y <= 0)
-                //{
-                //    move.y -= Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad) * Mathf.Abs(gravity);
-                //}
+                Debug.Log(Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad));
+                SlopeDirection *= Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad) * SlopeMultiplier;
                 move = GetSlopeMoveDirection(move);
-                //if (SlopeDirection.y > 0)
-                //{
-                //    move *= 1 - Mathf.Sin(Vector3.Angle(Vector3.up, slopeHit.normal) * Mathf.Deg2Rad);
-                //}
             }
             Vector3 finalMove = jumpVelocity + move * speed * speed_multiplier - SlopeDirection;
             characterController.Move(finalMove * Time.deltaTime);
@@ -215,13 +210,22 @@ public class FPSController : MonoBehaviour
 
     public void Shoot()
     {
+        //Debug.Log(!SingleShotCheck || !currentWeapon.weaponData.SingleShot);
         if (shootAction.IsPressed())
         {
-            shakeTimeRemaining = shakeDuration;
-            shakeMagnitude = 0.05f;
-            // Update the code to shoot
-            currentWeapon.Shoot();
-            InvokeAmmoCountChanged();
+            if ((!SingleShotCheck || !currentWeapon.weaponData.SingleShot))
+            {
+                SingleShotCheck = true;
+                shakeTimeRemaining = shakeDuration;
+                shakeMagnitude = 0.05f;
+                // Update the code to shoot
+                currentWeapon.Shoot();
+                InvokeAmmoCountChanged();
+            }
+        }
+        else
+        {
+            SingleShotCheck = false;
         }
     }
 
@@ -349,7 +353,7 @@ public class FPSController : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, NormHeight * 0.5f + 0.4f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0;
+            return angle < characterController.slopeLimit && angle != 0;
         }
 
         return false;

@@ -18,8 +18,9 @@ public abstract class Weapon : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
             // Instantiate the impact effect
-            Instantiate(impactEffect, hit.point,
+            GameObject Effect = Instantiate(impactEffect, hit.point,
             Quaternion.LookRotation(hit.normal));
+            Destroy(Effect, 3.0f);
             if (hitObject.TryGetComponent(out Damageable damageable))
             {
                 damageable.TakeDamage(weaponData.damage);
