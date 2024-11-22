@@ -8,7 +8,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private RecoilManager CameraRecoil;
     protected float nextFireTime = 0f;
     protected float ScopeTime = 10.0f;
-    public int ammoCount = 0;
+    public int ammoCount;
     public int magazineCount = 5;
     public bool Reloading = false;
 

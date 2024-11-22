@@ -6,5 +6,6 @@ public class AmmoItem : MonoBehaviour, Item
     {
         playerController.currentWeapon.magazineCount += magazineAmount;
         playerController.InvokeAmmoCountChanged();
+        Destroy(gameObject);
     }
 }

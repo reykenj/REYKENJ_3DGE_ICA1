@@ -24,6 +24,8 @@ public class FPSController : MonoBehaviour
 
     [SerializeField] private float bobFrequency = 1.0f;
     [SerializeField] private float bobAmplitude = 1.0f;
+    [SerializeField] GameObject WeaponHolder;
+    [SerializeField] GameObject TheWorld;
 
     private float originalCameraY;
     private float timer;
@@ -35,6 +37,7 @@ public class FPSController : MonoBehaviour
     private InputAction jumpAction;
     private InputAction sprintAction;
     private InputAction crouchAction;
+    private InputAction dropAction;
     private Vector2 mouseDelta;
     private Vector3 move;
     private Vector3 jumpVelocity;
@@ -100,6 +103,7 @@ public class FPSController : MonoBehaviour
         switchWeaponAction = playerInput.actions["SwitchWeapon"];
         scopeAction = playerInput.actions["Scope"];
         reloadAction = playerInput.actions["Reload"];
+        dropAction = playerInput.actions["Drop"];
 
         // Bobbing initial parameter
         originalCameraY = Camera.main.transform.localPosition.y;
@@ -140,7 +144,7 @@ public class FPSController : MonoBehaviour
         jumpVelocity.y += gravity * Time.deltaTime;
         if (!_sliding)
         {
-            Debug.Log("should be");
+            //Debug.Log("should be");
             move = transform.right * input.x + transform.forward * input.y;
             Vector3 SlopeDirection = new Vector3(0, 0, 0);
             if (OnSlope())
@@ -169,6 +173,7 @@ public class FPSController : MonoBehaviour
         {
             SwitchWeapon();
             Reload();
+            Drop();
         }
         
     }
@@ -206,7 +211,7 @@ public class FPSController : MonoBehaviour
     }
     bool Crouch()
     {
-        Debug.Log("CROUCH");
+        //Debug.Log("CROUCH");
         if (crouchAction.IsPressed())
         {
             characterController.height = Mathf.Lerp(characterController.height, NormHeight / 2, 5 * Time.deltaTime);
@@ -263,7 +268,7 @@ public class FPSController : MonoBehaviour
                 if (item != null)
                 {
                     item.Use(this);
-                    Destroy(hit.collider.gameObject);
+                    //Destroy(hit.collider.gameObject);
                 }
             }
         }
@@ -278,6 +283,41 @@ public class FPSController : MonoBehaviour
         }
     }
 
+    private void Drop()
+    {
+        if (dropAction.IsPressed())
+        {
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                if (weapons[i] != null && weapons[i] != currentWeapon)
+                {
+                    currentWeapon.gameObject.layer = 7;
+                    foreach (Transform child in currentWeapon.transform)
+                    {
+                        child.gameObject.layer = 7;
+                    }
+                    currentWeapon.transform.parent = TheWorld.transform;
+                    Rigidbody rigidbody = currentWeapon.gameObject.GetComponent<Rigidbody>();
+                    rigidbody.useGravity = true;
+                    rigidbody.isKinematic = false;
+                    currentWeapon.gameObject.GetComponent<IKWeaponGrab>().enabled = false;
+                    currentWeapon.enabled = false;
+
+                    weapons[currentWeaponIndex] = null;
+                    currentWeapon = weapons[i];
+                    currentWeaponIndex = i;
+                    currentWeapon.gameObject.SetActive(true);
+                    break;
+                }
+                else if(i == weapons.Length - 1)
+                {
+                    // TODO: disable hands
+                }
+            }
+            //currentWeapon.StartReloading(this);
+        }
+    }
+
     private void SwitchWeapon()
     {
 
@@ -289,13 +329,19 @@ public class FPSController : MonoBehaviour
         }
         if (scroll.y != 0)
         {
-            currentWeapon.gameObject.SetActive(false);
-            currentWeaponIndex += Move;
-            currentWeaponIndex %= weapons.Length;
-            currentWeaponIndex = Math.Abs(currentWeaponIndex);
-            currentWeapon = weapons[currentWeaponIndex];
-            currentWeapon.gameObject.SetActive(true);
-            InvokeAmmoCountChanged();
+            for (int i = 1; i < weapons.Length + 1; i++)
+            {
+                int PotentialWeaponIndex = Math.Abs((currentWeaponIndex + Move * i) % weapons.Length);
+                if (weapons[PotentialWeaponIndex] != null)
+                {
+                    currentWeapon.gameObject.SetActive(false);
+                    currentWeaponIndex = PotentialWeaponIndex;
+                    currentWeapon = weapons[currentWeaponIndex];
+                    currentWeapon.gameObject.SetActive(true);
+                    InvokeAmmoCountChanged();
+                    break;
+                }
+            }
         }
 
     }
