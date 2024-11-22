@@ -4640,6 +4640,8 @@ MonoBehaviour:
     type: 3}
   CameraRecoil: {fileID: 1728729922}
   ammoCount: 1000
+  magazineCount: 5
+  Reloading: 0
 --- !u!65 &778739113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16508,7 +16510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c719095f1b37285488fdf0401d00912c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoAmount: 50
+  magazineAmount: 5
 --- !u!1 &1988389545 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a523a2e1aa9fc054c83a4cfd0d4c7af5,
@@ -16539,6 +16541,8 @@ MonoBehaviour:
     type: 3}
   CameraRecoil: {fileID: 1728729922}
   ammoCount: 150
+  magazineCount: 5
+  Reloading: 0
 --- !u!114 &1988389548
 MonoBehaviour:
   m_ObjectHideFlags: 0

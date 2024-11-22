@@ -61,6 +61,7 @@ public class FPSController : MonoBehaviour
     // For weapon switching
     private InputAction switchWeaponAction;
     private InputAction scopeAction;
+    private InputAction reloadAction;
     private int currentWeaponIndex = 0;
     [HideInInspector] public Weapon currentWeapon;
 
@@ -98,6 +99,7 @@ public class FPSController : MonoBehaviour
         pickUpAction = playerInput.actions["PickUp"];
         switchWeaponAction = playerInput.actions["SwitchWeapon"];
         scopeAction = playerInput.actions["Scope"];
+        reloadAction = playerInput.actions["Reload"];
 
         // Bobbing initial parameter
         originalCameraY = Camera.main.transform.localPosition.y;
@@ -157,10 +159,18 @@ public class FPSController : MonoBehaviour
             Sliding();
         }
 
+
         Shoot();
         PickUp();
-        SwitchWeapon();
         Scope();
+
+
+        if (!currentWeapon.Reloading)
+        {
+            SwitchWeapon();
+            Reload();
+        }
+        
     }
 
     private void LateUpdate()
@@ -214,7 +224,7 @@ public class FPSController : MonoBehaviour
     public void Shoot()
     {
         //Debug.Log(!SingleShotCheck || !currentWeapon.weaponData.SingleShot);
-        if (shootAction.IsPressed())
+        if (shootAction.IsPressed() && !currentWeapon.Reloading)
         {
             if ((!SingleShotCheck || !currentWeapon.weaponData.SingleShot))
             {
@@ -234,7 +244,7 @@ public class FPSController : MonoBehaviour
     public void Scope()
     {
         bool Scoping = scopeAction.IsPressed();
-        currentWeapon.LookIntoScope(Scoping);
+        currentWeapon.LookIntoScope(Scoping && !currentWeapon.Reloading);
     }
 
     private void PickUp()
@@ -259,8 +269,18 @@ public class FPSController : MonoBehaviour
         }
     }
 
+    private void Reload()
+    {
+        //Debug.Log("Checking lol1");
+        if (reloadAction.IsPressed())
+        {
+            currentWeapon.StartReloading(this);
+        }
+    }
+
     private void SwitchWeapon()
     {
+
         Vector2 scroll = switchWeaponAction.ReadValue<Vector2>();
         int Move = 1;
         if (scroll.y > 0)
@@ -275,7 +295,9 @@ public class FPSController : MonoBehaviour
             currentWeaponIndex = Math.Abs(currentWeaponIndex);
             currentWeapon = weapons[currentWeaponIndex];
             currentWeapon.gameObject.SetActive(true);
+            InvokeAmmoCountChanged();
         }
+
     }
     void Sliding()
     {

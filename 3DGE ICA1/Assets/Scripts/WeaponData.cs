@@ -8,6 +8,7 @@ public class WeaponData : ScriptableObject
     public float range = 100f;
     public float fireRate = 0.1f;
     public int maxAmmo = 100;
+    public float ReloadTime = 3.0f;
     public bool SingleShot = false;
     public Vector3 Recoil = Vector3.zero;
     public Vector3 WeaponScopePosition = Vector3.zero;

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
@@ -7,8 +8,11 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private RecoilManager CameraRecoil;
     protected float nextFireTime = 0f;
     protected float ScopeTime = 10.0f;
-
     public int ammoCount = 0;
+    public int magazineCount = 5;
+    public bool Reloading = false;
+
+    private Coroutine ReloadingCoroutine;
     // Abstract method for shooting, to be implemented by subclasses
     public abstract void Shoot();
     // Protected method to handle raycast logic, can be used by subclasses
@@ -49,6 +53,29 @@ public abstract class Weapon : MonoBehaviour
             Random.Range(-weaponData.Recoil.y, weaponData.Recoil.y),
             Random.Range(-weaponData.Recoil.z, weaponData.Recoil.z)
         );
+    }
+
+    public void StartReloading(FPSController playerController)
+    {
+        ReloadingCoroutine = StartCoroutine(Reload(playerController));
+    }
+    private IEnumerator Reload(FPSController playerController)
+    {
+        if (magazineCount > 0 && ammoCount < weaponData.maxAmmo)
+        {
+            float elapsedTime = 0.0f;
+            Reloading = true;
+            while (elapsedTime < weaponData.ReloadTime)
+            {
+                elapsedTime += Time.deltaTime;
+
+                yield return null;
+            }
+            magazineCount--;
+            ammoCount = weaponData.maxAmmo;
+            playerController.InvokeAmmoCountChanged();
+            Reloading = false;
+        }
     }
 
 }

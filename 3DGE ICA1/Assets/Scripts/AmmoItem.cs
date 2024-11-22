@@ -1,10 +1,10 @@
 using UnityEngine;
 public class AmmoItem : MonoBehaviour, Item
 {
-    [SerializeField] private int ammoAmount;
+    [SerializeField] private int magazineAmount;
     public void Use(FPSController playerController)
     {
-        playerController.currentWeapon.ammoCount += ammoAmount;
+        playerController.currentWeapon.magazineCount += magazineAmount;
         playerController.InvokeAmmoCountChanged();
     }
 }
