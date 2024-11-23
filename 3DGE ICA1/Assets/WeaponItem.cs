@@ -17,13 +17,18 @@ public class WeaponItem : MonoBehaviour, Item
         gameObject.GetComponent<IKWeaponGrab>().enabled = true;
         Weapon weapon = gameObject.GetComponent<Weapon>();
         weapon.enabled = true;
-
+        bool Equipped = false;
+        //playerController.RightArm.SetActive(true);
         for (int i = 0; i < playerController.weapons.Length; i++)
         {
             if (playerController.weapons[i] == null)
             {
-                playerController.weapons[i] = weapon;
-                break;
+                if (!Equipped)
+                {
+                    Equipped = true;
+                    playerController.weapons[i] = weapon;
+                    break;
+                }
             }
         }
         transform.localPosition = Vector3.zero;

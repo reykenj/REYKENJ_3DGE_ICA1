@@ -307,11 +307,8 @@ public class FPSController : MonoBehaviour
                     currentWeapon = weapons[i];
                     currentWeaponIndex = i;
                     currentWeapon.gameObject.SetActive(true);
+                    InvokeAmmoCountChanged();
                     break;
-                }
-                else if(i == weapons.Length - 1)
-                {
-                    // TODO: disable hands
                 }
             }
             //currentWeapon.StartReloading(this);
