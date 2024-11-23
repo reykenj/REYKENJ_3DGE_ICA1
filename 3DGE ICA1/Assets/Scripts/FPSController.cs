@@ -24,7 +24,7 @@ public class FPSController : MonoBehaviour
 
     [SerializeField] private float bobFrequency = 1.0f;
     [SerializeField] private float bobAmplitude = 1.0f;
-    [SerializeField] GameObject WeaponHolder;
+    public GameObject WeaponHolder;
     [SerializeField] GameObject TheWorld;
 
     private float originalCameraY;
@@ -60,7 +60,7 @@ public class FPSController : MonoBehaviour
 
 
     [Header("Weapon List")]
-    [SerializeField] private Weapon[] weapons;
+    public Weapon[] weapons;
     // For weapon switching
     private InputAction switchWeaponAction;
     private InputAction scopeAction;
