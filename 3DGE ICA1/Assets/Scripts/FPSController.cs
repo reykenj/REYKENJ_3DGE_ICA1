@@ -38,6 +38,7 @@ public class FPSController : MonoBehaviour
     private InputAction sprintAction;
     private InputAction crouchAction;
     private InputAction dropAction;
+    private bool dropActionUp = true;
     private Vector2 mouseDelta;
     private Vector3 move;
     private Vector3 jumpVelocity;
@@ -287,31 +288,39 @@ public class FPSController : MonoBehaviour
     {
         if (dropAction.IsPressed())
         {
-            for (int i = 0; i < weapons.Length; i++)
+            if (dropActionUp)
             {
-                if (weapons[i] != null && weapons[i] != currentWeapon)
+                dropActionUp = false;
+                for (int i = 0; i < weapons.Length; i++)
                 {
-                    currentWeapon.gameObject.layer = 7;
-                    foreach (Transform child in currentWeapon.transform)
+                    if (weapons[i] != null && weapons[i] != currentWeapon)
                     {
-                        child.gameObject.layer = 7;
-                    }
-                    currentWeapon.transform.parent = TheWorld.transform;
-                    Rigidbody rigidbody = currentWeapon.gameObject.GetComponent<Rigidbody>();
-                    rigidbody.useGravity = true;
-                    rigidbody.isKinematic = false;
-                    currentWeapon.gameObject.GetComponent<IKWeaponGrab>().enabled = false;
-                    currentWeapon.enabled = false;
+                        currentWeapon.gameObject.layer = 7;
+                        foreach (Transform child in currentWeapon.transform)
+                        {
+                            child.gameObject.layer = 7;
+                        }
+                        currentWeapon.transform.parent = TheWorld.transform;
+                        Rigidbody rigidbody = currentWeapon.gameObject.GetComponent<Rigidbody>();
+                        rigidbody.useGravity = true;
+                        rigidbody.isKinematic = false;
+                        currentWeapon.gameObject.GetComponent<IKWeaponGrab>().enabled = false;
+                        currentWeapon.enabled = false;
 
-                    weapons[currentWeaponIndex] = null;
-                    currentWeapon = weapons[i];
-                    currentWeaponIndex = i;
-                    currentWeapon.gameObject.SetActive(true);
-                    InvokeAmmoCountChanged();
-                    break;
+                        weapons[currentWeaponIndex] = null;
+                        currentWeapon = weapons[i];
+                        currentWeaponIndex = i;
+                        currentWeapon.gameObject.SetActive(true);
+                        InvokeAmmoCountChanged();
+                        break;
+                    }
                 }
             }
             //currentWeapon.StartReloading(this);
+        }
+        else
+        {
+            dropActionUp = true;
         }
     }
 
@@ -324,11 +333,20 @@ public class FPSController : MonoBehaviour
         {
             Move = -1;
         }
+        Debug.Log("Move: " + Move);
         if (scroll.y != 0)
         {
             for (int i = 1; i < weapons.Length + 1; i++)
             {
-                int PotentialWeaponIndex = Math.Abs((currentWeaponIndex + Move * i) % weapons.Length);
+                //if (currentWeaponIndex == 0 )
+                //int PotentialWeaponIndex = Math.Abs((currentWeaponIndex + Move * i)) % weapons.Length;
+                int PotentialWeaponIndex = (currentWeaponIndex + Move * i);
+                if (PotentialWeaponIndex < 0)
+                {
+                    PotentialWeaponIndex = weapons.Length + PotentialWeaponIndex;
+                }
+                PotentialWeaponIndex %= weapons.Length;
+                Debug.Log("Potential: " + PotentialWeaponIndex);
                 if (weapons[PotentialWeaponIndex] != null)
                 {
                     currentWeapon.gameObject.SetActive(false);
