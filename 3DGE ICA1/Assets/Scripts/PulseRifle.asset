@@ -22,7 +22,7 @@ MonoBehaviour:
   BurstIterations: 3
   BurstDelay: 0.5
   Recoil: {x: -2, y: 2, z: 0.35}
-  WeaponScopePosition: {x: 0, y: 0, z: 0}
+  WeaponScopePosition: {x: -0.7, y: 0.13, z: -0.45}
   hitLayers:
     serializedVersion: 2
     m_Bits: 183
