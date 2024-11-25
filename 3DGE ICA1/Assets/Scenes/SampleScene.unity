@@ -251,13 +251,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 330585545}
-  weaponData: {fileID: 11400000, guid: 13758e5ba38300a4bb762a730db1c8f7, type: 2}
+  weaponData: {fileID: 11400000, guid: 6a6eb94b4d4a037469f67650c94927bc, type: 2}
   impactEffect: {fileID: 1868976684471438325, guid: 5bc37784348827848b899f2442254ac1,
     type: 3}
   CameraRecoil: {fileID: 1728729922}
   ammoCount: 0
   magazineCount: 5
   Reloading: 0
+  Shooting: 0
 --- !u!4 &77696763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4577187839491108, guid: a990e3ac1318b834488c784d851f42a9,
@@ -5114,6 +5115,7 @@ MonoBehaviour:
   ammoCount: 1000
   magazineCount: 5
   Reloading: 0
+  Shooting: 0
 --- !u!65 &778739113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17189,6 +17191,7 @@ MonoBehaviour:
   ammoCount: 0
   magazineCount: 5
   Reloading: 0
+  Shooting: 0
 --- !u!114 &1988389548
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -165,16 +165,19 @@ public class FPSController : MonoBehaviour
         }
 
 
-        Shoot();
-        PickUp();
         Scope();
-
-
-        if (!currentWeapon.Reloading)
+        if (!currentWeapon.Shooting)
         {
-            SwitchWeapon();
-            Reload();
-            Drop();
+            Shoot();
+            PickUp();
+
+
+            if (!currentWeapon.Reloading)
+            {
+                SwitchWeapon();
+                Reload();
+                Drop();
+            }
         }
         
     }
@@ -238,8 +241,8 @@ public class FPSController : MonoBehaviour
                 shakeTimeRemaining = shakeDuration;
                 shakeMagnitude = 0.05f;
                 // Update the code to shoot
-                currentWeapon.Shoot();
-                InvokeAmmoCountChanged();
+                currentWeapon.StartToShoot(this);
+                //InvokeAmmoCountChanged();
             }
         }
         else

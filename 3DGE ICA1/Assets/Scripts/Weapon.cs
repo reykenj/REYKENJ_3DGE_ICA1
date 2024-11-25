@@ -11,10 +11,14 @@ public abstract class Weapon : MonoBehaviour
     public int ammoCount;
     public int magazineCount = 5;
     public bool Reloading = false;
+    public Coroutine ShotCoroutine;
+    public bool Shooting = false;
+
+    //protected int BurstShotCurrentIteration = 0;
 
     private Coroutine ReloadingCoroutine;
     // Abstract method for shooting, to be implemented by subclasses
-    public abstract void Shoot();
+    public abstract void StartToShoot(FPSController playerController);
     // Protected method to handle raycast logic, can be used by subclasses
     protected void PerformRaycast()
     {

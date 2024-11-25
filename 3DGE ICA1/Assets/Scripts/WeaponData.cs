@@ -10,6 +10,9 @@ public class WeaponData : ScriptableObject
     public int maxAmmo = 100;
     public float ReloadTime = 3.0f;
     public bool SingleShot = false;
+    //public bool BurstShot = false;
+    public int BurstIterations = 1;
+    public float BurstDelay = 0.0f;
     public Vector3 Recoil = Vector3.zero;
     public Vector3 WeaponScopePosition = Vector3.zero;
     public LayerMask hitLayers; // Layers the weapon can hit

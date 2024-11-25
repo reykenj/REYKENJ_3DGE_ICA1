@@ -17,7 +17,10 @@ MonoBehaviour:
   range: 100
   fireRate: 0.02
   maxAmmo: 1000
+  ReloadTime: 3
   SingleShot: 0
+  BurstIterations: 1
+  BurstDelay: 0
   Recoil: {x: -2, y: 2, z: 0.35}
   WeaponScopePosition: {x: 0, y: 0, z: 0}
   hitLayers:
