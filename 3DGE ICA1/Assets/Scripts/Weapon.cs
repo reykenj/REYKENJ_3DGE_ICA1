@@ -50,6 +50,7 @@ public abstract class Weapon : MonoBehaviour
         {
             ProjectileRB.velocity = playerCamera.transform.forward * weaponData.ProjectileSpeed;
         }
+        Destroy(projectile, weaponData.ProjectileLifetime);
     }
 
 
