@@ -16,4 +16,6 @@ public class WeaponData : ScriptableObject
     public Vector3 Recoil = Vector3.zero;
     public Vector3 WeaponScopePosition = Vector3.zero;
     public LayerMask hitLayers; // Layers the weapon can hit
+    public int ProjectileSpeed = 15;
+    public GameObject Projectile;
 }

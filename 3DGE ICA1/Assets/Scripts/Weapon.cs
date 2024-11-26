@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.UI.Image;
+using UnityEngine.UIElements;
 public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
@@ -37,6 +39,16 @@ public abstract class Weapon : MonoBehaviour
             }
         }
     }
+    protected void ShootProjectile()
+    {
+        GameObject Projectile = Instantiate(weaponData.Projectile, playerCamera.transform.position, playerCamera.transform.rotation);
+        Rigidbody ProjectileRB = Projectile.GetComponent<Rigidbody>();
+        if (ProjectileRB != null)
+        {
+            ProjectileRB.velocity = playerCamera.transform.forward * weaponData.ProjectileSpeed;
+        }
+    }
+
 
     public void LookIntoScope(bool Scoping)
     {
