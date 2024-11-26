@@ -41,8 +41,11 @@ public abstract class Weapon : MonoBehaviour
     }
     protected void ShootProjectile()
     {
-        GameObject Projectile = Instantiate(weaponData.Projectile, playerCamera.transform.position, playerCamera.transform.rotation);
-        Rigidbody ProjectileRB = Projectile.GetComponent<Rigidbody>();
+        GameObject projectile = Instantiate(weaponData.Projectile, playerCamera.transform.position, playerCamera.transform.rotation);
+        Rigidbody ProjectileRB = projectile.GetComponent<Rigidbody>();
+        Projectile Proj = projectile.gameObject.GetComponent<Projectile>();
+        Proj.CollisionEffectPrefab = impactEffect;
+        Proj.damage = weaponData.damage;
         if (ProjectileRB != null)
         {
             ProjectileRB.velocity = playerCamera.transform.forward * weaponData.ProjectileSpeed;
