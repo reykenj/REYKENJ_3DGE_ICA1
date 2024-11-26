@@ -13858,6 +13858,8 @@ GameObject:
   - component: {fileID: 1244766503}
   - component: {fileID: 1244766502}
   - component: {fileID: 1244766501}
+  - component: {fileID: 1244766505}
+  - component: {fileID: 1244766504}
   m_Layer: 0
   m_Name: RPG
   m_TagString: Untagged
@@ -13929,9 +13931,57 @@ MonoBehaviour:
     type: 3}
   CameraRecoil: {fileID: 1728729922}
   ammoCount: 0
-  magazineCount: 5
+  magazineCount: 100
   Reloading: 0
   Shooting: 0
+--- !u!54 &1244766504
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244766499}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1244766505
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244766499}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12, y: 0.3, z: 1.42}
+  m_Center: {x: 0, y: 0.06, z: -0.15}
 --- !u!1 &1277102008
 GameObject:
   m_ObjectHideFlags: 0
@@ -17992,7 +18042,7 @@ GameObject:
   - component: {fileID: 3384540719753751221}
   - component: {fileID: 3384540719756618389}
   - component: {fileID: 3384540719755651157}
-  - component: {fileID: 3384540719756618392}
+  - component: {fileID: 3384540719756618390}
   m_Layer: 6
   m_Name: Rocket
   m_TagString: Untagged
@@ -18208,6 +18258,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3384540719753721493}
   m_Mesh: {fileID: 4300004, guid: 4e5ce0b6f97fdbc40b7bc818b06b80ba, type: 3}
+--- !u!114 &3384540719756618390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384540719753721493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2be55443dfbbea4994c4577e66d4dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileWeapon: {fileID: 1244766503}
+  meshRenderer: {fileID: 3384540719755651157}
 --- !u!33 &3384540719756618391
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18216,21 +18280,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3384540719753721495}
   m_Mesh: {fileID: 4300000, guid: 4e5ce0b6f97fdbc40b7bc818b06b80ba, type: 3}
---- !u!114 &3384540719756618392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: -4210712503039438076, guid: 8cec2f504953d69408e45e423deeed26,
-    type: 3}
-  m_PrefabInstance: {fileID: 6132718734676771453}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3384540719753721493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7edecde34b033b14c9b2bb2059c446a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  CollisionEffectPrefab: {fileID: 0}
 --- !u!4 &3803833567033759297
 Transform:
   m_ObjectHideFlags: 0
@@ -18322,6 +18371,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1244766500}
     m_Modifications:
+    - target: {fileID: 2020944730765236308, guid: 8cec2f504953d69408e45e423deeed26,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4301152890327682904, guid: 8cec2f504953d69408e45e423deeed26,
         type: 3}
       propertyPath: m_Name
