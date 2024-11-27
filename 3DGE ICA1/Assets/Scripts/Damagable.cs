@@ -7,7 +7,7 @@ public class Damageable : MonoBehaviour
     private Color originalColor;
     public Color damageColor = Color.red;
     public float damageEffectDuration = 0.5f;
-    private Renderer objectRenderer;
+    [SerializeField] private Renderer objectRenderer;
     private Coroutine damageCoroutine;
     [SerializeField] bool DamDestroy = true;
     private IEnumerator DamageEffect()
@@ -28,7 +28,10 @@ public class Damageable : MonoBehaviour
     }
     private void Start()
     {
-        objectRenderer = GetComponent<Renderer>();
+        if (objectRenderer == null)
+        {
+            objectRenderer = GetComponent<Renderer>();
+        }
         if (objectRenderer != null)
         {
             originalColor = objectRenderer.material.color;
