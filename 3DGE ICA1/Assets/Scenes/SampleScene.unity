@@ -163,6 +163,7 @@ Transform:
   - {fileID: 572370791}
   - {fileID: 572370789}
   - {fileID: 3803833567033759297}
+  - {fileID: 1918112325}
   m_Father: {fileID: 681291223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4712212
@@ -265,6 +266,9 @@ MonoBehaviour:
   ShootSFX: {fileID: 8300000, guid: b25fcaa481c4793499e0e729c604db4a, type: 3}
   ReloadSFX: {fileID: 8300000, guid: a7060b20e9e68ba4c96fb7cfa34fe3c1, type: 3}
   EmptyClipSFX: {fileID: 8300000, guid: 436369217a27f7047b75d9108dc4dc5b, type: 3}
+  MuzzleFlashPrefab: {fileID: 6582549360091600583, guid: 9a1b5c36068d2494db90ea4ae634aaa4,
+    type: 3}
+  MuzzleFlashTransform: {fileID: 1918112325}
 --- !u!4 &77696763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4577187839491108, guid: a990e3ac1318b834488c784d851f42a9,
@@ -5574,6 +5578,8 @@ MonoBehaviour:
   ShootSFX: {fileID: 8300000, guid: b25fcaa481c4793499e0e729c604db4a, type: 3}
   ReloadSFX: {fileID: 8300000, guid: a7060b20e9e68ba4c96fb7cfa34fe3c1, type: 3}
   EmptyClipSFX: {fileID: 8300000, guid: 436369217a27f7047b75d9108dc4dc5b, type: 3}
+  MuzzleFlashPrefab: {fileID: 0}
+  MuzzleFlashTransform: {fileID: 0}
 --- !u!65 &778739113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13937,6 +13943,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a767eb3e23b46eb40916c085e4e225bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1145902914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1145902915}
+  m_Layer: 6
+  m_Name: MuzzlePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1145902915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145902914}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.082, z: 0.314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1244766500}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1191895545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14207,6 +14244,7 @@ Transform:
   - {fileID: 3384540719753751217}
   - {fileID: 3384540719753751221}
   - {fileID: 3384540719753751223}
+  - {fileID: 1145902915}
   m_Father: {fileID: 681291223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1244766501
@@ -14261,6 +14299,9 @@ MonoBehaviour:
   ShootSFX: {fileID: 8300000, guid: e88314cc18e34ff4887fa721e2a86c61, type: 3}
   ReloadSFX: {fileID: 8300000, guid: a7060b20e9e68ba4c96fb7cfa34fe3c1, type: 3}
   EmptyClipSFX: {fileID: 8300000, guid: 436369217a27f7047b75d9108dc4dc5b, type: 3}
+  MuzzleFlashPrefab: {fileID: 6582549360091600583, guid: 9a1b5c36068d2494db90ea4ae634aaa4,
+    type: 3}
+  MuzzleFlashTransform: {fileID: 1145902915}
 --- !u!54 &1244766504
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17312,6 +17353,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e91114050480b9e42bb5300d843f2aa4, type: 3}
+--- !u!1 &1803587313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1803587314}
+  m_Layer: 6
+  m_Name: MuzzlePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1803587314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803587313}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0889, z: 0.2687}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 543450652611035294}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1816453371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17927,6 +17999,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1918112324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1918112325}
+  m_Layer: 6
+  m_Name: MuzzlePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1918112325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918112324}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.198, z: 1.54}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4712211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1921508331
 Mesh:
@@ -18580,6 +18683,9 @@ MonoBehaviour:
   ShootSFX: {fileID: 8300000, guid: b25fcaa481c4793499e0e729c604db4a, type: 3}
   ReloadSFX: {fileID: 8300000, guid: a7060b20e9e68ba4c96fb7cfa34fe3c1, type: 3}
   EmptyClipSFX: {fileID: 8300000, guid: 436369217a27f7047b75d9108dc4dc5b, type: 3}
+  MuzzleFlashPrefab: {fileID: 6582549360091600583, guid: 9a1b5c36068d2494db90ea4ae634aaa4,
+    type: 3}
+  MuzzleFlashTransform: {fileID: 1803587314}
 --- !u!114 &1988389548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19228,6 +19334,7 @@ Transform:
   - {fileID: 7717966782802768197}
   - {fileID: 6492817382287410900}
   - {fileID: 5815738729902371698}
+  - {fileID: 1803587314}
   m_Father: {fileID: 681291223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &814861083307690798

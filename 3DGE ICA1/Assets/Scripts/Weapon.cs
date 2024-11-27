@@ -18,6 +18,9 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected AudioClip ShootSFX;
     [SerializeField] protected AudioClip ReloadSFX;
     [SerializeField] protected AudioClip EmptyClipSFX;
+    [SerializeField] protected GameObject MuzzleFlashPrefab;
+    [SerializeField] protected Transform MuzzleFlashTransform;
+    private float MuzzleFlashDestroyTime = 0.21f;
 
     //protected int BurstShotCurrentIteration = 0;
 
@@ -30,6 +33,11 @@ public abstract class Weapon : MonoBehaviour
         if (ShootSFX != null)
         {
             AudioSource.PlayClipAtPoint(ShootSFX, transform.position);
+        }
+
+        if (MuzzleFlashPrefab != null)
+        {
+            Destroy(Instantiate(MuzzleFlashPrefab, MuzzleFlashTransform.position, playerCamera.transform.rotation), MuzzleFlashDestroyTime);
         }
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         if (Physics.Raycast(ray, out RaycastHit hit, weaponData.range,
