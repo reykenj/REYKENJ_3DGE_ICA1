@@ -2,8 +2,13 @@ using UnityEngine;
 public class WeaponItem : MonoBehaviour, Item
 {
     //[SerializeField] private int magazineAmount;
+    [SerializeField] private AudioClip PickUpSFX;
     public void Use(FPSController playerController)
     {
+        if (PickUpSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(PickUpSFX, transform.position);
+        }
         transform.SetParent(playerController.WeaponHolder.transform);
         gameObject.layer = 6;
         foreach (Transform child in transform)

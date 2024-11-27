@@ -115,16 +115,16 @@ public abstract class Weapon : MonoBehaviour
 
     public void StartReloading(FPSController playerController)
     {
-        if (ReloadSFX != null)
-        {
-            AudioSource.PlayClipAtPoint(ReloadSFX, transform.position);
-        }
         ReloadingCoroutine = StartCoroutine(Reload(playerController));
     }
     private IEnumerator Reload(FPSController playerController)
     {
         if (magazineCount > 0 && ammoCount < weaponData.maxAmmo)
         {
+            if (ReloadSFX != null)
+            {
+                AudioSource.PlayClipAtPoint(ReloadSFX, transform.position);
+            }
             float elapsedTime = 0.0f;
             Reloading = true;
             while (elapsedTime < weaponData.ReloadTime)
