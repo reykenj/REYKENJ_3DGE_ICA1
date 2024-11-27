@@ -2,13 +2,14 @@ using System.Collections;
 using UnityEngine;
 public class Damageable : MonoBehaviour
 {
-    private float health = 100f;
+    public float health = 100f;
     // For damage effects
     private Color originalColor;
     public Color damageColor = Color.red;
     public float damageEffectDuration = 0.5f;
     private Renderer objectRenderer;
     private Coroutine damageCoroutine;
+    [SerializeField] bool DamDestroy = true;
     private IEnumerator DamageEffect()
     {
         // Set to damage color instantly
@@ -48,7 +49,10 @@ public class Damageable : MonoBehaviour
         }
         if (health < 0)
         {
-            Destroy();
+            if (DamDestroy)
+            {
+                Destroy();
+            }
         }
     }
     public void Destroy()

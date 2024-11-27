@@ -6,7 +6,7 @@ using UnityEngine;
 public class ExplosiveBarrel : MonoBehaviour
 {
     [SerializeField] GameObject ExplosiveEffect;
-
+    [SerializeField] Damageable damageable;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,13 +16,16 @@ public class ExplosiveBarrel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (damageable.health <= 0)
+        {
+            GameObject Effect = Instantiate(ExplosiveEffect, transform.position, transform.rotation);
+            Destroy(Effect, 3.0f);
+            Destroy(this.gameObject);
+        }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        Instantiate(ExplosiveEffect, transform.position, Vector3.zero);
-        Destroy(ExplosiveEffect, 3.0f);
         //Destroy(gameObject);
     }
 
