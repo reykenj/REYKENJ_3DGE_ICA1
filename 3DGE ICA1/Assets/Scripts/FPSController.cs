@@ -382,6 +382,7 @@ public class FPSController : MonoBehaviour
         }
         else
         {
+            speed_multiplier = Math.Clamp(speed_multiplier, 0.0f, 4.0f);
             _sliding = false;
         }
     }
