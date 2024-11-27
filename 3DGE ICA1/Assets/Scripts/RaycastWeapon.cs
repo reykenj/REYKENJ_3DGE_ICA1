@@ -27,6 +27,10 @@ public class RaycastWeapon : Weapon
             }
             else if(ammoCount <= 0)
             {
+                if (EmptyClipSFX != null)
+                {
+                    AudioSource.PlayClipAtPoint(EmptyClipSFX, transform.position);
+                }
                 break;
             }
 

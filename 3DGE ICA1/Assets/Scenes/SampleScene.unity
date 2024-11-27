@@ -262,6 +262,9 @@ MonoBehaviour:
   magazineCount: 5
   Reloading: 0
   Shooting: 0
+  ShootSFX: {fileID: 8300000, guid: b25fcaa481c4793499e0e729c604db4a, type: 3}
+  ReloadSFX: {fileID: 8300000, guid: a7060b20e9e68ba4c96fb7cfa34fe3c1, type: 3}
+  EmptyClipSFX: {fileID: 8300000, guid: 436369217a27f7047b75d9108dc4dc5b, type: 3}
 --- !u!4 &77696763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4577187839491108, guid: a990e3ac1318b834488c784d851f42a9,
@@ -5568,6 +5571,9 @@ MonoBehaviour:
   magazineCount: 5
   Reloading: 0
   Shooting: 0
+  ShootSFX: {fileID: 8300000, guid: b25fcaa481c4793499e0e729c604db4a, type: 3}
+  ReloadSFX: {fileID: 8300000, guid: a7060b20e9e68ba4c96fb7cfa34fe3c1, type: 3}
+  EmptyClipSFX: {fileID: 8300000, guid: 436369217a27f7047b75d9108dc4dc5b, type: 3}
 --- !u!65 &778739113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14252,6 +14258,9 @@ MonoBehaviour:
   magazineCount: 100
   Reloading: 0
   Shooting: 0
+  ShootSFX: {fileID: 8300000, guid: e88314cc18e34ff4887fa721e2a86c61, type: 3}
+  ReloadSFX: {fileID: 8300000, guid: a7060b20e9e68ba4c96fb7cfa34fe3c1, type: 3}
+  EmptyClipSFX: {fileID: 8300000, guid: 436369217a27f7047b75d9108dc4dc5b, type: 3}
 --- !u!54 &1244766504
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18568,6 +18577,9 @@ MonoBehaviour:
   magazineCount: 5
   Reloading: 0
   Shooting: 0
+  ShootSFX: {fileID: 8300000, guid: b25fcaa481c4793499e0e729c604db4a, type: 3}
+  ReloadSFX: {fileID: 8300000, guid: a7060b20e9e68ba4c96fb7cfa34fe3c1, type: 3}
+  EmptyClipSFX: {fileID: 8300000, guid: 436369217a27f7047b75d9108dc4dc5b, type: 3}
 --- !u!114 &1988389548
 MonoBehaviour:
   m_ObjectHideFlags: 0

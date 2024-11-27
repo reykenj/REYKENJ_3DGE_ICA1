@@ -15,6 +15,9 @@ public abstract class Weapon : MonoBehaviour
     public bool Reloading = false;
     public Coroutine ShotCoroutine;
     public bool Shooting = false;
+    [SerializeField] protected AudioClip ShootSFX;
+    [SerializeField] protected AudioClip ReloadSFX;
+    [SerializeField] protected AudioClip EmptyClipSFX;
 
     //protected int BurstShotCurrentIteration = 0;
 
@@ -24,6 +27,10 @@ public abstract class Weapon : MonoBehaviour
     // Protected method to handle raycast logic, can be used by subclasses
     protected void PerformRaycast()
     {
+        if (ShootSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(ShootSFX, transform.position);
+        }
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         if (Physics.Raycast(ray, out RaycastHit hit, weaponData.range,
         weaponData.hitLayers))
@@ -45,6 +52,12 @@ public abstract class Weapon : MonoBehaviour
         Rigidbody ProjectileRB = projectile.GetComponent<Rigidbody>();
         Projectile Proj = projectile.gameObject.GetComponent<Projectile>();
         Boid homing = projectile.GetComponent<Boid>();
+
+        if (ShootSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(ShootSFX, transform.position);
+        }
+
         if (homing != null)
         {
             Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
@@ -93,6 +106,10 @@ public abstract class Weapon : MonoBehaviour
 
     public void StartReloading(FPSController playerController)
     {
+        if (ReloadSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(ReloadSFX, transform.position);
+        }
         ReloadingCoroutine = StartCoroutine(Reload(playerController));
     }
     private IEnumerator Reload(FPSController playerController)
