@@ -25,4 +25,7 @@ MonoBehaviour:
   WeaponScopePosition: {x: -0.7, y: 0.22, z: -0.4}
   hitLayers:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 695
+  ProjectileSpeed: 15
+  ProjectileLifetime: 5
+  Projectile: {fileID: 0}

@@ -336,7 +336,7 @@ public class FPSController : MonoBehaviour
         {
             Move = -1;
         }
-        Debug.Log("Move: " + Move);
+        //Debug.Log("Move: " + Move);
         if (scroll.y != 0)
         {
             for (int i = 1; i < weapons.Length + 1; i++)
@@ -349,7 +349,7 @@ public class FPSController : MonoBehaviour
                     PotentialWeaponIndex = weapons.Length + PotentialWeaponIndex;
                 }
                 PotentialWeaponIndex %= weapons.Length;
-                Debug.Log("Potential: " + PotentialWeaponIndex);
+                //Debug.Log("Potential: " + PotentialWeaponIndex);
                 if (weapons[PotentialWeaponIndex] != null)
                 {
                     currentWeapon.gameObject.SetActive(false);

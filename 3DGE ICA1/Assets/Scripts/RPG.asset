@@ -25,7 +25,7 @@ MonoBehaviour:
   WeaponScopePosition: {x: 0, y: 0, z: 0}
   hitLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 694
   ProjectileSpeed: 15
   ProjectileLifetime: 5
   Projectile: {fileID: 1763896263648869214, guid: 3b1f705a4d399e84183c4f4001a1d412,

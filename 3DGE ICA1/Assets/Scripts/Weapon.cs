@@ -44,6 +44,22 @@ public abstract class Weapon : MonoBehaviour
         GameObject projectile = Instantiate(weaponData.Projectile, playerCamera.transform.position, playerCamera.transform.rotation);
         Rigidbody ProjectileRB = projectile.GetComponent<Rigidbody>();
         Projectile Proj = projectile.gameObject.GetComponent<Projectile>();
+        Boid homing = projectile.GetComponent<Boid>();
+        if (homing != null)
+        {
+            Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+            if (Physics.Raycast(ray, out RaycastHit hit, weaponData.range,
+            weaponData.hitLayers))
+            {
+                homing._target = hit.collider.gameObject.transform;
+                Debug.Log(homing._target.name);
+                homing._maxSpeed = weaponData.ProjectileSpeed;
+            }
+            else
+            {
+                homing.enabled = false;
+            }
+        }
         Proj.CollisionEffectPrefab = impactEffect;
         Proj.damage = weaponData.damage;
         if (ProjectileRB != null)

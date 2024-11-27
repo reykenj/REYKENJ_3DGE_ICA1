@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3782045154874174685}
   - component: {fileID: 8430940704304960393}
   - component: {fileID: 1902340380530444842}
+  - component: {fileID: 4671502857931194252}
   m_Layer: 0
   m_Name: ReykenjRocket
   m_TagString: Untagged
@@ -95,6 +96,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edecde34b033b14c9b2bb2059c446a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  CollisionEffectPrefab: {fileID: 0}
+--- !u!114 &4671502857931194252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763896263648869214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd54f95574c585e478c6615b20fe2774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 0}
+  _maxSpeed: 5
+  _steeringTime: 0.5
+  _lookAheadDistance: 5
+  _avoidDistance: 5
+  _seekWeight: 0.5
+  _ObstacleAvoidanceWeight: 0.5
 --- !u!1 &5704149397937393936
 GameObject:
   m_ObjectHideFlags: 0
