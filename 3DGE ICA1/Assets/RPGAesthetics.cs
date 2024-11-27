@@ -11,7 +11,7 @@ public class RPGAesthetics : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateRPGAesthetics(0, 0);
+        UpdateRPGAesthetics(0, 0, 0);
     }
 
     void OnEnable()
@@ -19,7 +19,7 @@ public class RPGAesthetics : MonoBehaviour
         FPSController.OnAmmoCountChanged += UpdateRPGAesthetics;
     }
 
-    private void UpdateRPGAesthetics(int arg1, int arg2)
+    private void UpdateRPGAesthetics(int arg1, int arg2, int m)
     {
         if (projectileWeapon.ammoCount <= 0)
         {

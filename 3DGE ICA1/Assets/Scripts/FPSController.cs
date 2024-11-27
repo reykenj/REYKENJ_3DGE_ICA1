@@ -69,7 +69,7 @@ public class FPSController : MonoBehaviour
     private int currentWeaponIndex = 0;
     [HideInInspector] public Weapon currentWeapon;
 
-    public static System.Action<int, int> OnAmmoCountChanged;
+    public static System.Action<int, int, int> OnAmmoCountChanged;
 
     [Header("Pick Up")]
     [SerializeField] private float pickUpRange;
@@ -80,7 +80,7 @@ public class FPSController : MonoBehaviour
     public void InvokeAmmoCountChanged()
     {
         OnAmmoCountChanged?.Invoke(currentWeapon.ammoCount,
-        currentWeapon.weaponData.maxAmmo);
+        currentWeapon.weaponData.maxAmmo, currentWeapon.magazineCount);
     }
 
     // Start is called before the first frame update
