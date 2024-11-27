@@ -6478,7 +6478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 239, y: 316}
+  m_AnchoredPosition: {x: 239, y: 359}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &945306135
@@ -6510,14 +6510,16 @@ MonoBehaviour:
 
     Reload - R
 
+    Switch Weapon - Mouse Scroll
+
     Drop - G
 
-    Pick Up - E
+    Pick
+    Up - E
 
     Slide/Crouch - CTRL
 
-    Sprint
-    - Shift
+    Sprint - Shift
 
 '
   m_isRightToLeft: 0
