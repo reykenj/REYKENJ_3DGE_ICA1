@@ -308,6 +308,7 @@ public class FPSController : MonoBehaviour
                         rigidbody.useGravity = true;
                         rigidbody.isKinematic = false;
                         currentWeapon.gameObject.GetComponent<IKWeaponGrab>().enabled = false;
+                        currentWeapon.DropUI.SetActive(true);
                         currentWeapon.enabled = false;
 
                         weapons[currentWeaponIndex] = null;

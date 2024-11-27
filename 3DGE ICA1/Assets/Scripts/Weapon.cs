@@ -20,6 +20,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected AudioClip EmptyClipSFX;
     [SerializeField] protected GameObject MuzzleFlashPrefab;
     [SerializeField] protected Transform MuzzleFlashTransform;
+    public GameObject DropUI;
     private float MuzzleFlashDestroyTime = 0.21f;
 
     //protected int BurstShotCurrentIteration = 0;

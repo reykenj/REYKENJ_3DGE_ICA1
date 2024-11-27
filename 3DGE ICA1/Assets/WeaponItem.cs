@@ -18,6 +18,7 @@ public class WeaponItem : MonoBehaviour, Item
         Weapon weapon = gameObject.GetComponent<Weapon>();
         weapon.enabled = true;
         bool Equipped = false;
+        weapon.DropUI.SetActive(false);
         //playerController.RightArm.SetActive(true);
         for (int i = 0; i < playerController.weapons.Length; i++)
         {
