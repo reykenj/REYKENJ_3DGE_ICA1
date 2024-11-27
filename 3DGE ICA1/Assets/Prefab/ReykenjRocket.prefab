@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  ExplosionRadius: 5
+  ExplosionForce: 10
   CollisionEffectPrefab: {fileID: 0}
 --- !u!114 &4671502857931194252
 MonoBehaviour:
