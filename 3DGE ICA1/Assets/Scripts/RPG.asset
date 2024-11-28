@@ -21,7 +21,7 @@ MonoBehaviour:
   SingleShot: 1
   BurstIterations: 1
   BurstDelay: 0
-  Recoil: {x: 0, y: 0, z: 0}
+  Recoil: {x: -50, y: 50, z: 20}
   WeaponScopePosition: {x: 0, y: 0, z: 0}
   hitLayers:
     serializedVersion: 2
